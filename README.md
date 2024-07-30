@@ -1,27 +1,56 @@
-# CronmakerFrontend
+# CronWizard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
+CronWizard is a web application that allows users to generate cron expressions and calculate the next scheduled dates for these expressions.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Getting Started
 
-## Code scaffolding
+### Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Node.js (v14 or higher)
+- Angular CLI (v12 or higher)
 
-## Build
+### Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone this repository:
+    ```bash
+    git clone https://github.com/your-repo/cronwizard-frontend.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd cronwizard
+    ```
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+    
+### Running the Development Server
 
-## Running unit tests
+```bash 
+ng serve
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Open your browser and navigate to `http://localhost:4200`. The app will automatically reload if you change any of the source files.
 
-## Running end-to-end tests
+## Usage
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Generating Cron Expressions
 
-## Further help
+1. Select a time interval from the tabs at the top (Minutes, Hourly, Daily, Weekly, Monthly, Yearly).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+2. Fill in the required fields according to your selection.
+
+3. Click the "Generate" button. The generated cron expression will be displayed below.
+
+4. Click the "Copy" button to copy the cron expression.
+
+### Listing Next Scheduled Dates
+
+1. Enter your generated or manually entered cron expression in the input field.
+
+2. Click the "Calculate next dates" button. The next scheduled dates will be listed below.
+
+## About the Project
+
+This project provides a user-friendly interface for easily creating and testing cron expressions. The frontend part of the application is developed using Angular and styled with Bootstrap.
