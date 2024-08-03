@@ -1,7 +1,9 @@
+
 # CronWizard
 
 CronWizard is a web application that allows users to generate cron expressions and calculate the next scheduled dates for these expressions.
 
+To try out this application, visit [CronWizard](https://cronwizard.com).
 
 ## Getting Started
 
