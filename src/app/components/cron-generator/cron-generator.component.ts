@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CronService } from '../../services/cron.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import * as cronParser from 'cron-parser';
 
 @Component({
@@ -47,7 +48,10 @@ export class CronGeneratorComponent {
   yearlyWeek: number = 1;
   yearlyWeekday: number = 1;
 
-  constructor(private cronService: CronService) {}
+  constructor(
+    private cronService: CronService,
+    private analyticsService: AnalyticsService
+  ) {}
 
   generateCron() {
     let cronExpr = '';
@@ -122,6 +126,9 @@ export class CronGeneratorComponent {
     cronExpr = cronExpr.replace('?', '*');
 
     this.cronExpression = cronExpr;
+    
+    // Analytics tracking
+    this.analyticsService.trackCronGeneration(this.type);
   }
 
   calculateNextDates() {
@@ -131,6 +138,9 @@ export class CronGeneratorComponent {
       for (let i = 0; i < 5; i++) {
         this.nextDates.push(interval.next().toString());
       }
+      
+      // Analytics tracking
+      this.analyticsService.trackNextDatesCalculation();
     } catch (err) {
       console.error('Error parsing cron expression:', err);
       this.nextDates = ['Invalid cron expression'];
@@ -143,6 +153,9 @@ export class CronGeneratorComponent {
       setTimeout(() => {
         this.copyButtonText = 'Copy';
       }, 1000);
+      
+      // Analytics tracking
+      this.analyticsService.trackCronCopy();
     }).catch(err => {
       console.error('Failed to copy cron expression: ', err);
     });
