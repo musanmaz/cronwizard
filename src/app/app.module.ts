@@ -6,11 +6,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { CronGeneratorComponent } from './components/cron-generator/cron-generator.component';
+import { AdSenseComponent } from './components/adsense/adsense.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CronGeneratorComponent
+    CronGeneratorComponent,
+    AdSenseComponent
   ],
   imports: [
     BrowserModule,
