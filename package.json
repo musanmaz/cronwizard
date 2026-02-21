@@ -1,0 +1,26 @@
+{
+  "name": "cronwizard",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Cron expression generator, validator & scheduler toolkit",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "pnpm --filter './apps/*' --parallel run dev",
+    "dev:web": "pnpm --filter @cronwizard/web dev",
+    "dev:api": "pnpm --filter @cronwizard/api dev",
+    "build": "pnpm --filter './packages/*' run build && pnpm --filter './apps/*' run build",
+    "build:shared": "pnpm --filter @cronwizard/shared build",
+    "build:api": "pnpm --filter @cronwizard/api build",
+    "build:web": "pnpm --filter @cronwizard/web build",
+    "lint": "pnpm -r run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
+    "test": "pnpm -r run test",
+    "clean": "pnpm -r exec rm -rf dist .next node_modules/.cache"
+  }
+}
