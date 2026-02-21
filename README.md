@@ -144,6 +144,42 @@ pnpm lint            # ESLint çalıştır
 pnpm clean           # Build çıktılarını temizle
 ```
 
+## Vercel'a Deploy
+
+Bu proje Vercel'da tek deployment olarak çalışacak şekilde yapılandırılmıştır.
+Next.js API Route Handlers sayesinde ayrı bir backend sunucusuna gerek yoktur.
+
+### Adımlar
+
+1. [Vercel Dashboard](https://vercel.com/new) → "Import Git Repository"
+2. Repo'yu seç
+3. **Framework Preset**: Next.js (otomatik algılanır)
+4. **Root Directory**: `apps/web` olarak ayarla
+5. Build & install komutları `apps/web/vercel.json` tarafından otomatik yönetilir:
+   - Install: `cd ../.. && pnpm install`
+   - Build: `cd ../.. && pnpm build:shared && pnpm build:web`
+6. Deploy et
+
+### Ortam Değişkenleri (opsiyonel)
+
+| Değişken | Açıklama |
+|----------|----------|
+| `NEXT_PUBLIC_API_URL` | Harici bir API sunucusu kullanmak istersen (varsayılan: `/api`, yani aynı Vercel deployment) |
+
+### Yapı
+
+Vercel'da Next.js API Route Handlers serverless function olarak çalışır:
+
+| Endpoint | Tür |
+|----------|-----|
+| `/api/v1/cron/generate` | Serverless Function |
+| `/api/v1/cron/next` | Serverless Function |
+| `/api/v1/cron/validate` | Serverless Function |
+| `/api/v1/cron/export` | Serverless Function |
+| `/api/healthz` | Static (edge) |
+
+> **Not**: Ayrıca standalone NestJS API (`apps/api`) Docker veya kendi sunucunda çalıştırılabilir.
+
 ## Teknoloji Stack
 
 - **Monorepo**: pnpm workspaces
