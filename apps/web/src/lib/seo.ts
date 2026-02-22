@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 const SITE_NAME = 'CronWizard';
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cronwizard.dev';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cronwizard.com';
 const SITE_DESCRIPTION =
   'Free online cron expression generator, validator and explainer. Build cron schedules visually, convert between Unix and Quartz formats, calculate next run times, and export to Kubernetes, GitHub Actions or systemd.';
 
