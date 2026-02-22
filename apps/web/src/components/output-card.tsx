@@ -48,11 +48,10 @@ export function OutputCard({ result, nextRuns, format, error }: OutputCardProps)
   };
 
   return (
-    <div className="space-y-4">
-      {/* Cron Expression */}
-      <div className="rounded-lg border bg-card p-4 space-y-3">
+    <output className="block space-y-4" aria-live="polite">
+      <section className="rounded-lg border bg-card p-4 space-y-3" aria-label="Generated cron expression">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium text-muted-foreground">Cron Expression</h3>
+          <h2 className="text-sm font-medium text-muted-foreground">Cron Expression</h2>
           <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium uppercase">
             {format}
           </span>
@@ -69,17 +68,16 @@ export function OutputCard({ result, nextRuns, format, error }: OutputCardProps)
         <p className="text-sm text-muted-foreground">{result.description}</p>
 
         {result.warnings.length > 0 && (
-          <div className="text-sm text-yellow-600 bg-yellow-50 rounded p-2">
+          <div className="text-sm text-yellow-600 bg-yellow-50 rounded p-2" role="alert">
             {result.warnings.map((w, i) => (
               <p key={i}>{w}</p>
             ))}
           </div>
         )}
-      </div>
+      </section>
 
-      {/* Normalized */}
-      <div className="rounded-lg border bg-card p-4 space-y-2">
-        <h3 className="text-sm font-medium text-muted-foreground">Normalized Formats</h3>
+      <section className="rounded-lg border bg-card p-4 space-y-2" aria-label="Normalized formats">
+        <h2 className="text-sm font-medium text-muted-foreground">Normalized Formats</h2>
         <div className="grid grid-cols-2 gap-3 text-sm">
           <div>
             <span className="text-xs text-muted-foreground">Unix</span>
@@ -106,28 +104,26 @@ export function OutputCard({ result, nextRuns, format, error }: OutputCardProps)
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Next Runs */}
       {nextRuns && nextRuns.nextRuns.length > 0 && (
-        <div className="rounded-lg border bg-card p-4 space-y-2">
-          <h3 className="text-sm font-medium text-muted-foreground">
+        <section className="rounded-lg border bg-card p-4 space-y-2" aria-label="Next run times">
+          <h2 className="text-sm font-medium text-muted-foreground">
             Next {nextRuns.nextRuns.length} Runs
-          </h3>
-          <ul className="space-y-1 text-sm font-mono">
+          </h2>
+          <ol className="space-y-1 text-sm font-mono list-none">
             {nextRuns.human.map((run, i) => (
               <li key={i} className="flex items-center gap-2">
                 <span className="w-5 text-right text-muted-foreground text-xs">{i + 1}.</span>
-                <span>{run}</span>
+                <time>{run}</time>
               </li>
             ))}
-          </ul>
-        </div>
+          </ol>
+        </section>
       )}
 
-      {/* Export */}
-      <div className="rounded-lg border bg-card p-4 space-y-3">
-        <h3 className="text-sm font-medium text-muted-foreground">Export</h3>
+      <section className="rounded-lg border bg-card p-4 space-y-3" aria-label="Export options">
+        <h2 className="text-sm font-medium text-muted-foreground">Export</h2>
         <div className="flex flex-wrap gap-2">
           {EXPORT_TARGETS.map((t) => (
             <button
@@ -156,7 +152,7 @@ export function OutputCard({ result, nextRuns, format, error }: OutputCardProps)
             </button>
           </div>
         )}
-      </div>
-    </div>
+      </section>
+    </output>
   );
 }
