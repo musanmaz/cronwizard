@@ -9,7 +9,7 @@ export type WizardMode =
   | 'yearly'
   | 'advanced';
 
-export type ExportTarget = 'k8s' | 'gha' | 'systemd';
+export type ExportTarget = 'k8s' | 'gha' | 'systemd' | 'docker' | 'terraform' | 'crontab' | 'launchd';
 
 export interface GenerateRequest {
   mode: WizardMode;

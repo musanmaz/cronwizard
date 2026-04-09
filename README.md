@@ -1,34 +1,34 @@
 # CronWizard
 
-Cron expression generator, validator ve scheduler toolkit. Monorepo yapısında Next.js frontend + NestJS backend.
+Cron expression generator, validator, and scheduler toolkit. Monorepo with a Next.js frontend and NestJS backend.
 
-## Gereksinimler
+## Requirements
 
-| Araç   | Minimum Versiyon |
-|--------|-----------------|
-| Node.js | >= 20           |
-| pnpm    | >= 9            |
+| Tool    | Minimum Version |
+|---------|----------------|
+| Node.js | >= 20          |
+| pnpm    | >= 9           |
 
-pnpm kurulu değilse:
+If pnpm is not installed:
 
 ```bash
 npm install -g pnpm
 ```
 
-## Kurulum
+## Setup
 
 ```bash
-# Repo'yu klonla
+# Clone the repo
 git clone <repo-url> && cd cronwizard
 
-# Tüm bağımlılıkları yükle
+# Install all dependencies
 pnpm install
 
-# Shared paketi build et (API ve Web buna bağımlı)
+# Build the shared package (API and Web depend on it)
 pnpm build:shared
 ```
 
-## Proje Yapısı
+## Project Structure
 
 ```
 cronwizard/
@@ -36,43 +36,43 @@ cronwizard/
 │   ├── api/          # NestJS backend  (port 4000)
 │   └── web/          # Next.js frontend (port 3000)
 ├── packages/
-│   └── shared/       # Ortak tipler, zod şemaları, cron yardımcıları
+│   └── shared/       # Shared types, Zod schemas, cron helpers
 ├── package.json      # Root workspace scripts
 └── pnpm-workspace.yaml
 ```
 
-## Çalıştırma
+## Running
 
-### Hepsini birden (API + Web)
+### All at once (API + Web)
 
 ```bash
 pnpm dev
 ```
 
-### Sadece API
+### API only
 
 ```bash
 pnpm dev:api
 ```
 
-API varsayılan olarak `http://localhost:4000` adresinde çalışır.
-Swagger dokümantasyonu: `http://localhost:4000/docs`
+The API runs at `http://localhost:4000` by default.
+Swagger docs: `http://localhost:4000/docs`
 
-### Sadece Web
+### Web only
 
 ```bash
 pnpm dev:web
 ```
 
-Web varsayılan olarak `http://localhost:3000` adresinde çalışır.
+The web app runs at `http://localhost:3000` by default.
 
 ## Build
 
 ```bash
-# Tümünü build et (önce shared, sonra apps)
+# Build everything (shared first, then apps)
 pnpm build
 
-# Tek tek build
+# Build individually
 pnpm build:shared
 pnpm build:api
 pnpm build:web
@@ -81,30 +81,30 @@ pnpm build:web
 ## Test
 
 ```bash
-# Tüm testleri çalıştır
+# Run all tests
 pnpm test
 
-# Sadece shared paket testleri
+# Shared package tests only
 pnpm --filter @cronwizard/shared test
 
-# Sadece API testleri
+# API tests only
 pnpm --filter @cronwizard/api test
 ```
 
-## API Endpoint'leri
+## API Endpoints
 
-Tüm endpoint'ler `/v1` prefix'i altında. Base URL: `http://localhost:4000`
+All endpoints are under the `/v1` prefix. Base URL: `http://localhost:4000`
 
-| Method | Endpoint            | Açıklama                                     |
-|--------|---------------------|----------------------------------------------|
-| POST   | `/v1/cron/generate` | Wizard parametrelerinden cron üret            |
-| POST   | `/v1/cron/next`     | Cron ifadesi için gelecek çalışma zamanları   |
-| POST   | `/v1/cron/validate` | Cron ifadesini doğrula                        |
-| POST   | `/v1/cron/export`   | k8s / GitHub Actions / systemd formatında export |
-| GET    | `/healthz`          | Liveness probe                                |
-| GET    | `/readyz`           | Readiness probe                               |
+| Method | Endpoint            | Description                                    |
+|--------|---------------------|------------------------------------------------|
+| POST   | `/v1/cron/generate` | Generate a cron expression from wizard params  |
+| POST   | `/v1/cron/next`     | Get upcoming run times for a cron expression   |
+| POST   | `/v1/cron/validate` | Validate a cron expression                     |
+| POST   | `/v1/cron/export`   | Export in k8s / GitHub Actions / systemd format|
+| GET    | `/healthz`          | Liveness probe                                 |
+| GET    | `/readyz`           | Readiness probe                                |
 
-### Örnek: Cron Üretme
+### Example: Generate a Cron Expression
 
 ```bash
 curl -X POST http://localhost:4000/v1/cron/generate \
@@ -112,7 +112,7 @@ curl -X POST http://localhost:4000/v1/cron/generate \
   -d '{"mode": "daily", "params": {"at": {"hour": 9, "minute": 0}}, "format": "unix"}'
 ```
 
-### Örnek: Sonraki Çalışma Zamanları
+### Example: Get Next Run Times
 
 ```bash
 curl -X POST http://localhost:4000/v1/cron/next \
@@ -120,7 +120,7 @@ curl -X POST http://localhost:4000/v1/cron/next \
   -d '{"cron": "0 9 * * 1-5", "format": "unix", "timezone": "Europe/Istanbul", "count": 5}'
 ```
 
-### Örnek: Export (Kubernetes CronJob)
+### Example: Export (Kubernetes CronJob)
 
 ```bash
 curl -X POST http://localhost:4000/v1/cron/export \
@@ -128,67 +128,67 @@ curl -X POST http://localhost:4000/v1/cron/export \
   -d '{"cron": "0 9 * * 1-5", "format": "unix", "target": "k8s", "options": {"name": "my-job", "image": "alpine:latest", "command": "echo hello"}}'
 ```
 
-## Ortam Değişkenleri
+## Environment Variables
 
-| Değişken      | Varsayılan               | Açıklama                     |
-|---------------|--------------------------|------------------------------|
-| `PORT`        | `4000`                   | API sunucu portu             |
-| `CORS_ORIGIN` | `http://localhost:3000`  | İzin verilen origin'ler (virgülle ayır) |
+| Variable      | Default                  | Description                          |
+|---------------|--------------------------|--------------------------------------|
+| `PORT`        | `4000`                   | API server port                      |
+| `CORS_ORIGIN` | `http://localhost:3000`  | Allowed origins (comma-separated)    |
 
-## Kullanışlı Komutlar
+## Useful Commands
 
 ```bash
-pnpm format          # Prettier ile formatla
-pnpm format:check    # Format kontrolü
-pnpm lint            # ESLint çalıştır
-pnpm clean           # Build çıktılarını temizle
+pnpm format          # Format with Prettier
+pnpm format:check    # Check formatting
+pnpm lint            # Run ESLint
+pnpm clean           # Remove build artifacts
 ```
 
-## Vercel'a Deploy
+## Deploy to Vercel
 
-Bu proje Vercel'da tek deployment olarak çalışacak şekilde yapılandırılmıştır.
-Next.js API Route Handlers sayesinde ayrı bir backend sunucusuna gerek yoktur.
+This project is configured for a single Vercel deployment.
+Next.js API Route Handlers eliminate the need for a separate backend server.
 
-### Adımlar
+### Steps
 
 1. [Vercel Dashboard](https://vercel.com/new) → "Import Git Repository"
-2. Repo'yu seç
-3. **Framework Preset**: Next.js (otomatik algılanır)
-4. **Root Directory**: `apps/web` olarak ayarla
-5. Build & install komutları `apps/web/vercel.json` tarafından otomatik yönetilir:
+2. Select the repo
+3. **Framework Preset**: Next.js (auto-detected)
+4. **Root Directory**: set to `apps/web`
+5. Build & install commands are managed automatically by `apps/web/vercel.json`:
    - Install: `cd ../.. && pnpm install`
    - Build: `cd ../.. && pnpm build:shared && pnpm build:web`
-6. Deploy et
+6. Deploy
 
-### Ortam Değişkenleri (opsiyonel)
+### Environment Variables (optional)
 
-| Değişken | Açıklama |
-|----------|----------|
-| `NEXT_PUBLIC_API_URL` | Harici bir API sunucusu kullanmak istersen (varsayılan: `/api`, yani aynı Vercel deployment) |
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_API_URL` | Use an external API server (default: `/api`, i.e. same Vercel deployment) |
 
-### Yapı
+### Architecture
 
-Vercel'da Next.js API Route Handlers serverless function olarak çalışır:
+On Vercel, Next.js API Route Handlers run as serverless functions:
 
-| Endpoint | Tür |
-|----------|-----|
+| Endpoint | Type |
+|----------|------|
 | `/api/v1/cron/generate` | Serverless Function |
 | `/api/v1/cron/next` | Serverless Function |
 | `/api/v1/cron/validate` | Serverless Function |
 | `/api/v1/cron/export` | Serverless Function |
 | `/api/healthz` | Static (edge) |
 
-> **Not**: Ayrıca standalone NestJS API (`apps/api`) Docker veya kendi sunucunda çalıştırılabilir.
+> **Note**: The standalone NestJS API (`apps/api`) can also be run via Docker or on your own server.
 
-## Teknoloji Stack
+## Tech Stack
 
 - **Monorepo**: pnpm workspaces
 - **Frontend**: Next.js 14 (App Router) + TypeScript + Tailwind CSS + shadcn/ui
 - **Backend**: NestJS 10 + TypeScript + Swagger
-- **Shared**: Zod şemaları + cron-parser + cronstrue
-- **Test**: Vitest + Supertest
-- **Güvenlik**: Helmet + Rate Limiting (60 req/dk)
+- **Shared**: Zod schemas + cron-parser + cronstrue
+- **Testing**: Vitest + Supertest
+- **Security**: Helmet + Rate Limiting (60 req/min)
 
-## Lisans
+## License
 
 MIT

@@ -22,12 +22,13 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <article className="container mx-auto px-4 py-8 max-w-3xl">
-        <header className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Cron Expression Builder</h1>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Generate, validate, and export cron expressions with an intuitive wizard.
-            Supports Unix &amp; Quartz formats with timezone-aware scheduling.
+      <article className="max-w-5xl mx-auto w-full">
+        <header className="text-center mb-10">
+          <h1 className="font-headline text-3xl font-bold tracking-tight text-on-surface mb-2">
+            Precision Schedule Builder
+          </h1>
+          <p className="text-on-surface-variant text-sm max-w-lg mx-auto mb-6 leading-relaxed">
+            Configure cron expressions with real-time human translation and zero-config deployment.
           </p>
         </header>
         <WizardBuilder />

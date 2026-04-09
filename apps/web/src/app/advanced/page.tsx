@@ -28,10 +28,12 @@ export default function AdvancedPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <article className="container mx-auto px-4 py-8 max-w-3xl">
-        <header className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Advanced Cron Editor</h1>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+      <article className="max-w-5xl mx-auto w-full">
+        <header className="text-center mb-10">
+          <h1 className="font-headline text-3xl font-bold tracking-tight text-on-surface mb-2">
+            Advanced Cron Editor
+          </h1>
+          <p className="text-on-surface-variant text-sm max-w-xl mx-auto leading-relaxed">
             Enter a cron expression directly to validate, describe in plain English, and export.
           </p>
         </header>

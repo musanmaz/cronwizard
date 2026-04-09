@@ -11,11 +11,17 @@ import type { WizardMode, WizardParams, CronFormat } from '@cronwizard/shared';
 
 export function WizardBuilder() {
   const {
-    mode, setMode,
-    params, updateParams,
-    format, setFormat,
-    timezone, setTimezone,
-    result, nextRuns, error,
+    mode,
+    setMode,
+    params,
+    updateParams,
+    format,
+    setFormat,
+    timezone,
+    setTimezone,
+    result,
+    nextRuns,
+    error,
   } = useCronWizard();
 
   const handlePreset = (m: WizardMode, p: WizardParams, f: CronFormat) => {
@@ -25,44 +31,31 @@ export function WizardBuilder() {
   };
 
   return (
-    <div className="space-y-8">
-      {/* Step 1: Mode */}
-      <section className="space-y-3">
-        <div className="flex items-center gap-2">
-          <span className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-bold">
-            1
-          </span>
-          <h2 className="text-lg font-semibold">Choose Schedule Type</h2>
-        </div>
+    <div className="space-y-10">
+      {/* Schedule Type */}
+      <section>
         <ModeSelector value={mode} onChange={setMode} />
         <PresetList onSelect={handlePreset} />
       </section>
 
-      {/* Step 2: Parameters */}
-      <section className="space-y-3">
-        <div className="flex items-center gap-2">
-          <span className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-bold">
-            2
-          </span>
-          <h2 className="text-lg font-semibold">Configure Parameters</h2>
+      {/* Configuration Parameters */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="h-px flex-grow bg-outline-variant/20" />
+          <h2 className="font-headline text-xs font-bold uppercase tracking-widest text-outline">
+            Configuration Parameters
+          </h2>
+          <div className="h-px flex-grow bg-outline-variant/20" />
         </div>
-        <div className="rounded-lg border p-4 space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ParamForm mode={mode} params={params} onChange={updateParams} />
-          <div className="flex flex-wrap gap-6 pt-2 border-t">
-            <FormatToggle value={format} onChange={setFormat} />
-            <TimezoneSelect value={timezone} onChange={setTimezone} />
-          </div>
+          <TimezoneSelect value={timezone} onChange={setTimezone} />
+          <FormatToggle value={format} onChange={setFormat} />
         </div>
       </section>
 
       {/* Step 3: Output */}
-      <section className="space-y-3">
-        <div className="flex items-center gap-2">
-          <span className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-bold">
-            3
-          </span>
-          <h2 className="text-lg font-semibold">Result</h2>
-        </div>
+      <section className="relative">
         <OutputCard result={result} nextRuns={nextRuns} format={format} error={error} />
       </section>
     </div>
