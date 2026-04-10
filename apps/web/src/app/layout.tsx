@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { siteConfig, buildMetadata, jsonLdWebApp } from '@/lib/seo';
 import { TopNav } from '@/components/top-nav';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { Analytics } from '@vercel/analytics/next';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -126,6 +127,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </footer>
         </div>
         <Toaster position="bottom-right" richColors />
+        <Analytics />
       </body>
     </html>
   );
