@@ -28,6 +28,11 @@ export const metadata: Metadata = {
     default: `${siteConfig.name} - Cron Expression Generator & Validator`,
     template: `%s | ${siteConfig.name}`,
   },
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+  },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
   },
