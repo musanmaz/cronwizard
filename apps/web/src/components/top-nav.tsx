@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
-  { href: '/', label: 'Generator' },
-  { href: '/advanced', label: 'Advanced' },
+  { href: '/', label: 'Builder' },
+  { href: '/advanced', label: 'Validator' },
+  { href: '/examples', label: 'Examples' },
   { href: '/docs', label: 'Docs' },
   { href: 'https://github.com/musanmaz/cronwizard', label: 'GitHub', external: true },
 ];

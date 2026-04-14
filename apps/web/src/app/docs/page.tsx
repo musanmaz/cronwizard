@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { buildMetadata, jsonLdFaqPage, jsonLdBreadcrumb, siteConfig } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Cron Expression Documentation & Guide',
+  title: 'Cron Expression Syntax Guide & Documentation',
   description:
-    'Learn cron syntax: Unix vs Quartz format differences, special characters (*, /, -, ,), common examples, and frequent mistakes. A complete cron reference guide.',
+    'Complete cron expression reference — learn Unix & Quartz cron syntax, special characters (*, /, -, ,), 20+ practical examples, and common mistakes to avoid. Free cron cheat sheet.',
   path: '/docs',
   keywords: [
     'cron syntax',
@@ -16,6 +16,9 @@ export const metadata: Metadata = buildMetadata({
     'cron special characters',
     'cron examples',
     'how to write cron expression',
+    'cron cheat sheet',
+    'cron expression explained',
+    'cron tutorial',
   ],
 });
 

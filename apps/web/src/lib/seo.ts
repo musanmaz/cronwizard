@@ -17,14 +17,25 @@ export const siteConfig = {
     'crontab',
     'cron schedule',
     'cron builder',
+    'cron wizard',
+    'cron maker',
+    'cron editor',
+    'cron configurator',
     'quartz cron',
+    'quartz cron expression',
     'unix cron',
     'cron next run',
     'cron to human readable',
+    'cron expression explained',
+    'cron expression syntax',
+    'cron expression generator',
+    'cron expression generator online',
+    'cron expression builder',
+    'crontab generator',
+    'cronjob expression',
     'kubernetes cronjob',
     'github actions schedule',
     'systemd timer',
-    'cron expression generator online',
     'crontab guru alternative',
   ],
 } as const;
@@ -55,11 +66,20 @@ export function buildMetadata(page: {
       description,
       url,
       locale: 'en_US',
+      images: [
+        {
+          url: `${SITE_URL}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `${SITE_NAME} - Cron Expression Generator & Validator`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: [`${SITE_URL}/opengraph-image`],
     },
     robots: {
       index: true,
@@ -75,6 +95,17 @@ export function buildMetadata(page: {
   };
 }
 
+export function jsonLdOrganization() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/favicon.svg`,
+    sameAs: ['https://github.com/musanmaz/cronwizard'],
+  };
+}
+
 export function jsonLdWebApp() {
   return {
     '@context': 'https://schema.org',
@@ -84,6 +115,13 @@ export function jsonLdWebApp() {
     description: SITE_DESCRIPTION,
     applicationCategory: 'DeveloperApplication',
     operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript',
+    softwareVersion: '1.0',
+    author: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -99,6 +137,69 @@ export function jsonLdWebApp() {
       'GitHub Actions schedule export',
       'systemd timer export',
     ],
+  };
+}
+
+export function jsonLdSoftwareApp() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: SITE_DESCRIPTION,
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Any',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  };
+}
+
+export function jsonLdHowTo() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to Create a Cron Expression',
+    description:
+      'Step-by-step guide to building a cron expression using CronWizard visual builder.',
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Choose your cron format',
+        text: 'Select Unix (5 fields) or Quartz (6-7 fields) depending on your target platform.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Configure each time field',
+        text: 'Use the visual selectors to set minute, hour, day of month, month, and day of week values.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Review the expression',
+        text: 'See the generated cron expression and its human-readable translation in real time.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Preview next run times',
+        text: 'Check the upcoming scheduled run times with your preferred timezone to verify correctness.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 5,
+        name: 'Export or copy',
+        text: 'Copy the expression or export as Kubernetes CronJob YAML, GitHub Actions workflow, or systemd timer.',
+      },
+    ],
+    tool: {
+      '@type': 'HowToTool',
+      name: 'CronWizard',
+    },
   };
 }
 

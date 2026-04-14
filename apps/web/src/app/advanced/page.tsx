@@ -3,9 +3,9 @@ import { buildMetadata, jsonLdBreadcrumb, siteConfig } from '@/lib/seo';
 import { AdvancedEditor } from '@/components/advanced-editor';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Advanced Cron Editor',
+  title: 'Free Cron Expression Validator & Tester Online',
   description:
-    'Enter any cron expression to instantly validate, describe in plain English, see next run times with timezone support, and export to Kubernetes, GitHub Actions or systemd.',
+    'Validate any cron expression instantly — get plain-English descriptions, preview the next 10 run times with timezone support, and export to Kubernetes, GitHub Actions or systemd. Free online cron tester.',
   path: '/advanced',
   keywords: [
     'cron validator',
@@ -13,6 +13,9 @@ export const metadata: Metadata = buildMetadata({
     'cron parser online',
     'cron expression tester',
     'validate crontab',
+    'cron checker',
+    'cron expression validator',
+    'test cron expression',
   ],
 });
 
@@ -31,10 +34,11 @@ export default function AdvancedPage() {
       <article className="max-w-5xl mx-auto w-full">
         <header className="text-center mb-10">
           <h1 className="font-headline text-3xl font-bold tracking-tight text-on-surface mb-2">
-            Advanced Cron Editor
+            Cron Expression Validator &amp; Tester
           </h1>
           <p className="text-on-surface-variant text-sm max-w-xl mx-auto leading-relaxed">
-            Enter a cron expression directly to validate, describe in plain English, and export.
+            Paste any cron expression to instantly validate, get a plain-English description,
+            preview next run times, and export to Kubernetes, GitHub Actions or systemd.
           </p>
         </header>
         <AdvancedEditor />

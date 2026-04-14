@@ -1,13 +1,21 @@
 import type { Metadata } from 'next';
 import { WizardBuilder } from '@/components/wizard-builder';
-import { buildMetadata, jsonLdBreadcrumb, siteConfig } from '@/lib/seo';
+import { buildMetadata, jsonLdBreadcrumb, jsonLdHowTo, siteConfig } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Cron Expression Builder',
+  title: 'Free Cron Expression Generator & Builder Online',
   description:
-    'Build cron expressions visually with an intuitive step-by-step wizard. Supports Unix and Quartz formats, timezone-aware next run calculation, and export to Kubernetes, GitHub Actions, systemd.',
+    'Free online cron expression generator — build cron schedules visually in seconds. Supports Unix & Quartz formats, instant validation, next-run preview with timezone, and one-click export to Kubernetes, GitHub Actions & systemd.',
   path: '/',
-  keywords: ['cron builder', 'cron wizard', 'visual cron editor', 'schedule builder'],
+  keywords: [
+    'cron builder',
+    'cron wizard',
+    'visual cron editor',
+    'schedule builder',
+    'cron maker',
+    'cron schedule generator',
+    'crontab builder',
+  ],
 });
 
 export default function HomePage() {
@@ -15,6 +23,7 @@ export default function HomePage() {
     { name: 'Home', url: siteConfig.url },
     { name: 'Cron Builder', url: `${siteConfig.url}/` },
   ]);
+  const howTo = jsonLdHowTo();
 
   return (
     <>
@@ -22,13 +31,18 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howTo) }}
+      />
       <article className="max-w-5xl mx-auto w-full">
         <header className="text-center mb-10">
           <h1 className="font-headline text-3xl font-bold tracking-tight text-on-surface mb-2">
-            Precision Schedule Builder
+            Cron Expression Generator &amp; Builder
           </h1>
           <p className="text-on-surface-variant text-sm max-w-lg mx-auto mb-6 leading-relaxed">
-            Configure cron expressions with real-time human translation and zero-config deployment.
+            Build cron expressions visually with an intuitive wizard. Get real-time human-readable
+            translations, validate instantly, and export to Kubernetes, GitHub Actions or systemd.
           </p>
         </header>
         <WizardBuilder />
