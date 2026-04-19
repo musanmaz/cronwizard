@@ -163,6 +163,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div>
                   <h3 className="text-primary font-bold font-headline text-sm mb-3">Project</h3>
                   <nav className="flex flex-col gap-2">
+                    <Link href="/about" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body text-sm">
+                      About
+                    </Link>
+                    <Link href="/contact" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body text-sm">
+                      Contact
+                    </Link>
                     <a
                       href="https://github.com/musanmaz/cronwizard"
                       target="_blank"
@@ -176,8 +182,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
               <div className="border-t border-outline-variant/20 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
                 <span className="text-primary font-bold font-headline">CronWizard</span>
+                <nav className="flex gap-6 text-sm" aria-label="Legal">
+                  <Link href="/privacy" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body">
+                    Privacy Policy
+                  </Link>
+                  <Link href="/terms" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body">
+                    Terms of Service
+                  </Link>
+                </nav>
                 <p className="text-on-surface-variant/40 font-body text-sm tracking-wide">
-                  &copy; {new Date().getFullYear()} CronWizard &mdash; Free online cron expression generator &amp; validator
+                  &copy; {new Date().getFullYear()} CronWizard
                 </p>
               </div>
             </div>
