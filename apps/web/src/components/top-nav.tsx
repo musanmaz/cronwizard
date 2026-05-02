@@ -7,6 +7,7 @@ const navItems = [
   { href: '/', label: 'Builder' },
   { href: '/advanced', label: 'Validator' },
   { href: '/examples', label: 'Examples' },
+  { href: '/best-practices', label: 'Best Practices' },
   { href: '/docs', label: 'Docs' },
   { href: 'https://github.com/musanmaz/cronwizard', label: 'GitHub', external: true },
 ];

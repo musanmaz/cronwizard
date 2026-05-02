@@ -92,9 +92,38 @@ export default function QuartzPage() {
         </h1>
 
         <p>
-          Quartz is the most popular job scheduling library for Java. It uses an extended cron
-          format with 6 or 7 fields, adding a seconds field and supporting special characters
-          like <code>?</code>, <code>L</code>, <code>W</code>, and <code>#</code>.
+          Quartz is the dominant job scheduling library in the Java ecosystem. It powers
+          scheduled tasks in Spring Boot, drives background jobs in countless enterprise
+          applications, and is the engine behind Jenkins build triggers. Despite the name
+          &quot;cron&quot;, Quartz expressions are noticeably different from the Unix cron
+          format that most developers learn first — and that difference is the source of a
+          surprising number of production bugs.
+        </p>
+        <p>
+          The most important practical difference is the number of fields. Unix cron has five
+          fields. Quartz has six required fields and an optional seventh for the year. The
+          extra field is <em>seconds</em>, and it sits at the beginning of the expression. So
+          where Unix cron writes <code>0 9 * * 1-5</code> for &quot;weekdays at 9 AM&quot;,
+          Quartz writes <code>0 0 9 ? * MON-FRI</code> — same intent, four extra characters,
+          a different day-of-week numbering, and a mandatory <code>?</code> wildcard that
+          doesn&apos;t exist in Unix cron at all.
+        </p>
+        <p>
+          Beyond the seconds field, Quartz adds several special characters that have no Unix
+          equivalent: <code>L</code> for &quot;last&quot;, <code>W</code> for &quot;nearest
+          weekday&quot;, <code>#</code> for &quot;nth weekday of the month&quot;, and the
+          required <code>?</code> for &quot;no specific value&quot;. These additions make
+          Quartz strictly more expressive — you can write &quot;the last Friday of every
+          month&quot; in a single expression — at the cost of a steeper learning curve and
+          incompatibility with most Unix tooling.
+        </p>
+        <p>
+          The rest of this page is a working reference: the field layout, the special
+          characters, a side-by-side comparison with Unix cron, and copy-paste examples for
+          the most common Quartz schedules. If you are switching between Java and non-Java
+          stacks, also keep our <Link href="/docs">Unix cron documentation</Link> open in a
+          tab — many bugs come from translating between the two without noticing the day-of-week
+          shift.
         </p>
 
         <h2 id="quartz-format" className="text-xl font-bold text-on-surface mt-10">

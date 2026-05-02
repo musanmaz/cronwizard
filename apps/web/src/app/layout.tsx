@@ -53,11 +53,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3016597125971732"
-          crossOrigin="anonymous"
-        />
+        {process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true' && (
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3016597125971732"
+            crossOrigin="anonymous"
+          />
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebApp()) }}
@@ -121,9 +123,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <Link href="/" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body text-sm">
                       Cron Builder
                     </Link>
-                    <Link href="/generator" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body text-sm">
-                      Cron Generator
-                    </Link>
                     <Link href="/advanced" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body text-sm">
                       Cron Validator
                     </Link>
@@ -137,6 +136,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </Link>
                     <Link href="/examples" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body text-sm">
                       Cron Examples
+                    </Link>
+                    <Link href="/best-practices" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body text-sm">
+                      Best Practices
+                    </Link>
+                    <Link href="/troubleshooting" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body text-sm">
+                      Troubleshooting
                     </Link>
                     <Link href="/quartz" className="text-on-surface-variant/60 hover:text-primary transition-colors font-body text-sm">
                       Quartz Cron

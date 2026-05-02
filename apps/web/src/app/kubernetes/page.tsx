@@ -135,9 +135,29 @@ export default function KubernetesPage() {
         </h1>
 
         <p>
-          Kubernetes CronJobs create Jobs on a recurring schedule using standard Unix cron syntax.
-          This guide covers the cron format, YAML configuration, best practices, and ready-to-use
-          examples.
+          Kubernetes CronJobs are the cluster-native way to run scheduled work. They wrap the
+          familiar Unix cron syntax in a Kubernetes resource that creates a fresh{' '}
+          <code>Job</code> at every fire of the schedule, which in turn creates a fresh{' '}
+          <code>Pod</code> to do the actual work. The model is straightforward, but a handful
+          of details — concurrency policy, history limits, missed-deadline handling, and
+          timezone behavior — turn out to matter a lot in production.
+        </p>
+        <p>
+          The schedule itself is plain 5-field Unix cron. There is no support for the Quartz
+          6-7 field format, so if you are migrating a schedule from a Java application, drop
+          the seconds field. The most common conversion mistake is leaving the leading{' '}
+          <code>0</code> in place: <code>0 0 9 * * ?</code> (Quartz, &quot;9 AM&quot;) becomes{' '}
+          <code>0 9 * * *</code> in Kubernetes — not <code>0 0 9 * *</code>, which would be a
+          syntax error.
+        </p>
+        <p>
+          Below you will find the full schedule format, three production-grade YAML templates
+          you can adapt, the rules around concurrency policies, and the timezone configuration
+          introduced in Kubernetes 1.27. For the broader operational concerns of running cron
+          jobs in production — locking, idempotency, monitoring — see the{' '}
+          <Link href="/best-practices">cron best practices guide</Link>. If a schedule is
+          firing but the Pod is silent, check the{' '}
+          <Link href="/troubleshooting">troubleshooting guide</Link>.
         </p>
 
         <h2 id="cron-format" className="text-xl font-bold text-on-surface mt-10">
